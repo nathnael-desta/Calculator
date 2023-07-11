@@ -1,0 +1,76 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: aqua;
+}
+
+.main {
+    width: 250px;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+}
+
+.display {
+    flex: 1 1 0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    font-weight: bold;
+    font-size: 3rem;
+}
+
+.buttons {
+    flex: 3 1 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    
+
+}
+
+.first, .second, .third, .forth, .fifth {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.ac, .sign, .remainder, .devide,.nine, .eight, .seven, .six, .five, .four, .three, .two, .one, .multiply, .minus, .plus, .zero, .reset, .equals {
+    background-color: lightgray;
+    color: black;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;   
+    cursor: grab;
+}
+
+.devide, .multiply, .minus, .plus, .equals {
+    background-color: orange;
+    color: white;
+}
+
+.nine, .eight, .seven, .six, .five, .four, .three, .two, .one, .zero {
+    background-color: darkgray;
+    color: white;
+}
+
+.reset {
+    height: 50px;
+    width: 100px;
+    border-radius: 25px;
+    color: white;
+    background-color: darkgray;
+}
