@@ -45,7 +45,7 @@ body {
     
 }
 
-.ac, .sign, .remainder, .devide,.nine, .eight, .seven, .six, .five, .four, .three, .two, .one, .multiply, .minus, .plus, .zero, .reset, .equals {
+.ac, .sign, .remainder, .devide,.nine, .eight, .seven, .six, .five, .four, .three, .two, .one, .multiply, .minus, .plus, .zero, .reset, .equals, .dot,.back {
     background-color: lightgray;
     color: black;
     height: 50px;
@@ -62,15 +62,8 @@ body {
     color: white;
 }
 
-.nine, .eight, .seven, .six, .five, .four, .three, .two, .one, .zero {
+.nine, .eight, .seven, .six, .five, .four, .three, .two, .one, .zero, .dot, .back {
     background-color: darkgray;
     color: white;
 }
 
-.zero {
-    height: 50px;
-    width: 170px;
-    border-radius: 25px;
-    color: white;
-    background-color: darkgray;
-}

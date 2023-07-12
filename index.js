@@ -14,6 +14,7 @@ function remainder(x, y) {
   return x % y;
 }
 
+const dot = document.querySelector(".dot");
 const zero = document.querySelector(".zero");
 const one = document.querySelector(".one");
 const two = document.querySelector(".two");
@@ -34,18 +35,28 @@ const subtraction = document.querySelector(".minus");
 const reset = document.querySelector(".reset");
 const equal = document.querySelector(".equals");
 const display = document.querySelector(".display");
+const back = document.querySelector('.back');
 
 let isEqual = false;
 let num1 = null;
 let num2 = null;
 let operatorOn = false;
 let operator;
+let onlyOnce = false;
 
 function addToDisplay() {
+  if (this.textContent == "." && onlyOnce){
+    return;
+  }
+  if(this.textContent == ".") {
+    onlyOnce = true;
+  }
   if (!operatorOn) {
     let text = display.textContent;
-    text += this.textContent;
-    display.textContent = text;
+    if (text.length < 9) {
+      text += this.textContent;
+      display.textContent = text;
+    }
   } else {
     display.textContent = this.textContent;
   }
@@ -54,9 +65,21 @@ function addToDisplay() {
 
 function addToDisplayFront() {
   let text = display.textContent;
-  display.textContent = text[0] == "-" ? text.slice(1) : "-" + text;
+  if (text.length < 9) {
+    display.textContent = text[0] == "-" ? text.slice(1) : "-" + text;
+  }
 }
 
+function remove(){
+  if (operatorOn){
+    return;
+  }
+  if(display.textContent != ""){
+    display.textContent = display.textContent.slice(0,display.textContent.length - 1)
+  }
+}
+
+dot.addEventListener("click", addToDisplay);
 zero.addEventListener("click", addToDisplay);
 one.addEventListener("click", addToDisplay);
 two.addEventListener("click", addToDisplay);
@@ -69,13 +92,19 @@ eight.addEventListener("click", addToDisplay);
 nine.addEventListener("click", addToDisplay);
 zero.addEventListener("click", addToDisplay);
 sign.addEventListener("click", addToDisplayFront);
+back.addEventListener('click', remove);
 
 function operate() {
   operatorOn = true;
+  onlyOnce = false;
   if (!num1) {
-    num1 = parseInt(display.textContent);
+    num1 = parseFloat(display.textContent);
   } else {
-    let prevNum = parseInt(display.textContent);
+    if (operator == "÷" && num1 == 0) {
+      display.textContent = "0 div! press AC"
+      return;
+    }
+    let prevNum = parseFloat(display.textContent);
     num1 =
       operator == "+"
         ? add(num1, prevNum)
@@ -86,7 +115,7 @@ function operate() {
         : operator == "%"
         ? remainder(num1, prevNum)
         : devide(num1, prevNum);
-    display.textContent = num1;
+    display.textContent = parseFloat(num1.toFixed(5));
   }
   operator = this.textContent;
 }
@@ -98,17 +127,27 @@ division.addEventListener("click", operate);
 remain.addEventListener("click", operate);
 
 function answer() {
-  let prevNum = parseInt(display.textContent);
-  display.textContent =
+  onlyOnce = false;
+  let prevNum = parseFloat(display.textContent);
+  if (operatorOn || typeof num1 != "number") {
+    display.textContent = "bad op! press AC"
+    return;
+  }
+  if (operator == "÷" && parseInt(display.textContent) == 0) {
+    display.textContent = "0 div! press AC"
+    return;
+  }
+  let z =
     operator == "+"
-      ? add(num1, prevNum)
+      ? add(num1, prevNum).toFixed(5)
       : operator == "-"
-      ? subtract(num1, prevNum)
+      ? subtract(num1, prevNum).toFixed(5)
       : operator == "x"
-      ? multiply(num1, prevNum)
+      ? multiply(num1, prevNum).toFixed(5)
       : operator == "%"
-      ? remainder(num1, prevNum)
-      : devide(num1, prevNum);
+      ? remainder(num1, prevNum).toFixed(5)
+      : devide(num1, prevNum).toFixed(5);
+    display.textContent = parseFloat(z);
   num1 = null;
 }
 
@@ -119,6 +158,7 @@ function empty() {
   num1 = null;
   num2 = null;
   operatorOn = false;
+  onlyOnce = false;
   display.textContent = "";
 }
 
