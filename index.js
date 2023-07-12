@@ -61,13 +61,23 @@ function addToDisplay() {
     display.textContent = this.textContent;
   }
   operatorOn = false;
+
+  this.classList.add('darker');
+  setTimeout(() => this.classList.remove('darker'), 200);
 }
 
 function addToDisplayFront() {
+  this.classList.add('darker');
+  setTimeout(() => this.classList.remove('darker'), 200);
   let text = display.textContent;
+  if (display.textContent == ""){
+    return;
+  }
   if (text.length < 9) {
     display.textContent = text[0] == "-" ? text.slice(1) : "-" + text;
   }
+
+  
 }
 
 function remove(){
@@ -118,6 +128,9 @@ function operate() {
     display.textContent = parseFloat(num1.toFixed(5));
   }
   operator = this.textContent;
+
+  this.classList.add('darker');
+  setTimeout(() => this.classList.remove('darker'), 200);
 }
 
 addition.addEventListener("click", operate);
@@ -149,6 +162,9 @@ function answer() {
       : devide(num1, prevNum).toFixed(5);
     display.textContent = parseFloat(z);
   num1 = null;
+
+  this.classList.add('darker');
+  setTimeout(() => this.classList.remove('darker'), 200);
 }
 
 equal.addEventListener("click", answer);
@@ -160,6 +176,9 @@ function empty() {
   operatorOn = false;
   onlyOnce = false;
   display.textContent = "";
+
+  this.classList.add('darker');
+  setTimeout(() => this.classList.remove('darker'), 200);
 }
 
 ac.addEventListener("click", empty);
